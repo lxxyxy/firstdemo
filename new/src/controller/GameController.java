@@ -70,12 +70,7 @@ public class GameController implements GameListener {
     @Override
     public void onPlayerClickCell(ChessboardPoint point, CellComponent component) {
         if (selectedPoint != null && model.isValidMove(selectedPoint, point)) {
-            model.moveChessPiece(selectedPoint, point);
-            view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));
-            selectedPoint = null;
-            swapColor();
-            view.repaint();
-
+           
             // TODO: if the chess enter Dens or Traps and so on
             //先写进入巢穴,则对方赢
            if(model.decidedens(point,selectedPoint)){
@@ -85,7 +80,9 @@ public class GameController implements GameListener {
            model.decidetraps(point,selectedPoint);
             model.moveChessPiece(selectedPoint, point);
             view.setChessComponentAtGrid(point, view.removeChessComponentAtGrid(selectedPoint));
-
+selectedPoint = null;
+            swapColor();
+            view.repaint();
         }
     }
 
